@@ -11,16 +11,17 @@
   "scripts": {
     "start": "stencil build --dev --watch --serve",
     "build": "stencil build",
-    "dev:live": "npm run site:link && node start-netlify.mjs --live",
+    "build:deploy": "node deploy.esbuild.mjs",
     "site:deploy": ""
   },
   "dependencies": {
     "@coveo/atomic": "2.4.2",
     "@coveo/headless": "2.3.0",
-    "@stencil/core": "2.21.0"
+    "@stencil/core": "3.0.1"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "5.0.2",
+    "esbuild": "0.17.10",
     "gts": "3.1.1",
     "prettier": "2.8.2",
     "rollup-plugin-dotenv": "0.4.1",

@@ -27,6 +27,11 @@ export const config: Config = {
     },
     {
       type: "dist-custom-elements",
+      minify: false,
+      includeGlobalScripts: true,
+      generateTypeDeclarations: false,
+      externalRuntime: false,
+      customElementsExportBehavior: "bundle",
     },
   ],
   devServer: {
