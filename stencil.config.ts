@@ -30,14 +30,15 @@ export const config: Config = {
     },
   ],
   devServer: {
-    port: parseInt(process.env.STENCIL_PORT) || 3333,
+    port: 3333,
   },
   plugins: [
+    dotenvPlugin(),
     replace({
       "process.env.PLATFORM_URL": `'${process.env.PLATFORM_URL}'`,
       "process.env.ORGANIZATION_ID": `'${process.env.ORGANIZATION_ID}'`,
+      "process.env.API_KEY": `'${process.env.API_KEY}'`,
     }),
-    dotenvPlugin(),
   ],
   rollupPlugins: {
     before: [
