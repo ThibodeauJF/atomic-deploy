@@ -3,4 +3,5 @@ body {
 }
 atomic-search-layout {
   height: auto;
+  --atomic-primary: blue;
 }

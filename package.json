@@ -12,12 +12,12 @@
     "start": "stencil build --dev --watch --serve",
     "build": "stencil build",
     "build:deploy": "node deploy.esbuild.mjs",
-    "site:deploy": ""
+    "deploy": "npm run build && npm run build:deploy && coveo deploy"
   },
   "dependencies": {
     "@coveo/atomic": "2.4.2",
     "@coveo/headless": "2.3.0",
-    "@stencil/core": "3.0.1"
+    "@stencil/core": "2.17.3"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "5.0.2",

@@ -26,13 +26,24 @@ export const config: Config = {
       type: "dist",
     },
     {
+      type: 'dist-custom-elements-bundle',
+      minify: false,
+      includeGlobalScripts: true,
+      externalRuntime: false,
+      inlineDynamicImports: false,
+      dir: 'dist/components'
+    },
+    /*
+    If migrating to Stencil v3, the "dist-custom-elements-bundle" output target should be replaced by the following:
+    {
       type: "dist-custom-elements",
+      customElementsExportBehavior: "bundle",
       minify: false,
       includeGlobalScripts: true,
       generateTypeDeclarations: false,
       externalRuntime: false,
-      customElementsExportBehavior: "bundle",
     },
+    */
   ],
   devServer: {
     port: 3333,

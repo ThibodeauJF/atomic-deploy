@@ -1,7 +1,17 @@
 import { appendFileSync, readFileSync } from "fs";
 import { build } from "esbuild";
 
-function jsBundle() {
+function jsIndexBundle() {
+  const entry = "dist/index.js";
+  return build({
+    entryPoints: [entry],
+    bundle: true,
+    outfile: "dist/bundle/index.js",
+    format: "esm",
+  });
+}
+
+function jsComponentsBundle() {
   const entry = "dist/components/index.js";
   const contents = readFileSync(entry, "utf-8");
   const toAppend = "\ndefineCustomElements();";
@@ -12,9 +22,9 @@ function jsBundle() {
   return build({
     entryPoints: ["dist/components/index.js"],
     bundle: true,
-    outfile: "dist/bundle/index.js",
-    format: "esm",
     minify: true,
+    outfile: "dist/bundle/components.js",
+    format: "esm",
   });
 }
 
@@ -27,8 +37,10 @@ function cssBundle() {
   });
 }
 
+// TODO: add html
+
 async function main() {
-  await Promise.all([jsBundle(), cssBundle()]);
+  await Promise.all([jsIndexBundle(), jsComponentsBundle(), cssBundle()]);
 }
 
 main();
