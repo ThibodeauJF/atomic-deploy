@@ -1,5 +1,6 @@
-import { appendFileSync, readFileSync } from "fs";
+import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import { build } from "esbuild";
+import { join } from "path";
 
 function jsIndexBundle() {
   const entry = "dist/index.js";
@@ -12,7 +13,7 @@ function jsIndexBundle() {
 }
 
 function jsComponentsBundle() {
-  const entry = "dist/components/index.js";
+  const entry = join("dist/components/index.js");
   const contents = readFileSync(entry, "utf-8");
   const toAppend = "\ndefineCustomElements();";
   if (!contents.includes(toAppend)) {
@@ -37,10 +38,25 @@ function cssBundle() {
   });
 }
 
-// TODO: add html
+function html() {
+  const entry = join("src/pages/index.html");
+  const outputFile = join("dist/bundle/index.html");
+  const htmlContents = readFileSync(entry, "utf-8");
+  const hostedPageContents =
+    /<atomic-hosted-page>((.|\n)*)<\/atomic-hosted-page>/gm
+      .exec(htmlContents)[1]
+      .trim();
+
+  writeFileSync(outputFile, hostedPageContents, "utf-8");
+}
 
 async function main() {
-  await Promise.all([jsIndexBundle(), jsComponentsBundle(), cssBundle()]);
+  await Promise.all([
+    jsIndexBundle(),
+    jsComponentsBundle(),
+    cssBundle(),
+    html(),
+  ]);
 }
 
 main();

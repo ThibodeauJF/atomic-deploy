@@ -6,8 +6,12 @@
   },
   "javascriptEntryFiles": [
     {
+      "path": "components.js",
+      "isModule": true
+    },
+    {
       "path": "index.js",
-      "isModule": false
+      "isModule": true
     }
   ],
   "javascriptUrls": [
