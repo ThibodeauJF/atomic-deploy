@@ -1,5 +1,7 @@
+import { waitForAtomic } from "./utils/atomic";
+
 async function main() {
-  await customElements.whenDefined("atomic-search-interface");
+  await waitForAtomic();
   const searchInterface: HTMLAtomicSearchInterfaceElement =
     document.querySelector("atomic-search-interface")!;
 
