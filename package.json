@@ -12,7 +12,7 @@
     "start": "stencil build --dev --watch --serve",
     "build": "stencil build",
     "build:deploy": "node deploy.esbuild.mjs",
-    "deploy": "npm run build && npm run build:deploy && coveo deploy"
+    "deploy": "npm run build && npm run build:deploy && coveo ui:deploy"
   },
   "dependencies": {
     "@coveo/atomic": "2.4.2",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@rollup/plugin-replace": "5.0.2",
     "esbuild": "0.17.10",
+    "fs-extra": "^11.1.0",
     "gts": "3.1.1",
     "prettier": "2.8.2",
     "rollup-plugin-dotenv": "0.4.1",

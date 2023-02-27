@@ -1,18 +1,9 @@
-import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import { build } from "esbuild";
 import { join } from "path";
+import fsExtra from "fs-extra";
+const { appendFileSync, readFileSync, writeFileSync, ensureDirSync } = fsExtra;
 
-function jsIndexBundle() {
-  const entry = "dist/index.js";
-  return build({
-    entryPoints: [entry],
-    bundle: true,
-    outfile: "dist/bundle/index.js",
-    format: "esm",
-  });
-}
-
-function jsComponentsBundle() {
+function jsBundle() {
   const entry = join("dist/components/index.js");
   const contents = readFileSync(entry, "utf-8");
   const toAppend = "\ndefineCustomElements();";
@@ -24,7 +15,7 @@ function jsComponentsBundle() {
     entryPoints: ["dist/components/index.js"],
     bundle: true,
     minify: true,
-    outfile: "dist/bundle/components.js",
+    outfile: "dist/bundle/index.js",
     format: "esm",
   });
 }
@@ -51,9 +42,10 @@ function html() {
 }
 
 async function main() {
+  ensureDirSync("dist/bundle");
+
   await Promise.all([
-    jsIndexBundle(),
-    jsComponentsBundle(),
+    jsBundle(),
     cssBundle(),
     html(),
   ]);
