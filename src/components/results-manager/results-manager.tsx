@@ -1,4 +1,5 @@
 import { Component, h } from "@stencil/core";
+import { waitForAtomic } from "../../utils/atomic";
 import template1 from "./template-1.html";
 
 /**
@@ -10,6 +11,10 @@ import template1 from "./template-1.html";
   shadow: false,
 })
 export class ResultsManager {
+  public async componentWillLoad() {
+    return waitForAtomic();
+  }
+
   public render() {
     return (
       <atomic-result-list>
